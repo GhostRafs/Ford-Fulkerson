@@ -1,0 +1,56 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#graph {
+    width: 800px;
+    height: 600px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+#flow-result {
+    margin: 10px;
+    font-size: 18px;
+}
+
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.node circle {
+    fill: #69b3a2;
+}
+
+.node text {
+    font-size: 12px;
+    pointer-events: none;
+}
+
+path.flow {
+    fill: none;
+    stroke: red;
+    stroke-width: 2px;
+}
+
+path.path-arrow {
+    fill: none;
+    stroke: blue;
+    stroke-width: 2px;
+    marker-end: url(#arrowhead);
+}
+
+.link-text {
+    font-size: 12px;
+    fill: black;
+}
