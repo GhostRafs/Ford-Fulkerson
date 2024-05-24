@@ -1,4 +1,4 @@
-class Graph {
+class Graph { //classe grafo
     constructor(size) {
         this.size = size;
         this.adjMatrix = Array.from({ length: size }, () => Array(size).fill(0));
@@ -6,58 +6,58 @@ class Graph {
         this.edges = [];
     }
 
-    addEdge(from, to, capacity) {
+    addEdge(from, to, capacity) { //adciona aresta ao grafo
         if (!this.adjMatrix[from][to]) {
-            this.adjMatrix[from][to] = capacity;
+            this.adjMatrix[from][to] = capacity; // adciona aresta com peso ao array caso ela não exista
             this.edges.push({ source: from, target: to, capacity: capacity });
         }
     }
-
-    bfs(source, sink, parent) {
-        let visited = Array(this.size).fill(false);
-        let queue = [];
+  
+    bfs(source, sink, parent) { //faz busca por bfs para ser utilizado no fordFulkerson
+        let visited = Array(this.size).fill(false); //array com os nós visitados
+        let queue = []; //fila de nós restantes
         queue.push(source);
-        visited[source] = true;
+        visited[source] = true; //marca o nó da vez como visitado
 
         while (queue.length > 0) {
-            let u = queue.shift();
+            let u = queue.shift(); //remove o primeiro nó da fila
 
-            for (let v = 0; v < this.size; v++) {
+            for (let v = 0; v < this.size; v++) { //percorre dos nós adjacentes ao atual
                 if (visited[v] === false && this.adjMatrix[u][v] > 0) {
-                    queue.push(v);
-                    visited[v] = true;
-                    parent[v] = u;
+                    queue.push(v); //adciona o nó adjacente à fila
+                    visited[v] = true; //marca-o como visitado
+                    parent[v] = u; //marca-o como o pai do próximo nó
                 }
             }
         }
 
         return visited[sink];
     }
-
+    //ford fulkerson
     fordFulkerson(source, sink) {
-        let parent = Array(this.size).fill(-1);
-        let maxFlow = 0;
-        let minCapacity = Infinity;
+        let parent = Array(this.size).fill(-1); //array que armazena pais encontrados na busca bfs
+        let maxFlow = 0; //variável do fluxo máximo
+        let minCapacity = Infinity; //variável da capacidade mínima
 
         while (this.bfs(source, sink, parent)) {
-            let pathFlow = Infinity;
+            let pathFlow = Infinity; //no começo inicializa o fluxo como infinito
 
-            // Find the maximum flow through the path found by BFS
+            // Encontra o mínimo pelo caminho dado pelo BFS
             for (let v = sink; v !== source; v = parent[v]) {
                 let u = parent[v];
                 pathFlow = Math.min(pathFlow, this.adjMatrix[u][v]);
             }
 
-            // Update residual capacities of the edges and reverse edges along the path
+            // Atualiza as capacidades que sobraram das arestas
             for (let v = sink; v !== source; v = parent[v]) {
                 let u = parent[v];
                 this.adjMatrix[u][v] -= pathFlow;
                 this.adjMatrix[v][u] += pathFlow;
             }
 
-            // Add path flow to overall flow
+            // Adciona o fluxo encontrado ao fluxo máximo
             maxFlow += pathFlow;
-            minCapacity = Math.min(minCapacity, pathFlow);
+            minCapacity = Math.min(minCapacity, pathFlow); //atualiza a capacidade mínima conforme o que o código encontrou
         }
 
         return { maxFlow, minCapacity };
