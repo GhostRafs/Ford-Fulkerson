@@ -1,56 +1,49 @@
-/* style.css */
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
 }
 
-#graph {
-    width: 800px;
-    height: 600px;
-    border: 1px solid #ccc;
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+#graph-container {
+    width: 600px;
+    height: 400px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
     margin-top: 20px;
-}
-
-#flow-result {
-    margin: 10px;
     font-size: 18px;
-}
-
-.link {
-    stroke: #999;
-    stroke-opacity: 0.6;
-}
-
-.node {
-    stroke: #fff;
-    stroke-width: 1.5px;
-}
-
-.node circle {
-    fill: #69b3a2;
-}
-
-.node text {
-    font-size: 12px;
-    pointer-events: none;
-}
-
-path.flow {
-    fill: none;
-    stroke: red;
-    stroke-width: 2px;
-}
-
-path.path-arrow {
-    fill: none;
-    stroke: blue;
-    stroke-width: 2px;
-    marker-end: url(#arrowhead);
-}
-
-.link-text {
-    font-size: 12px;
-    fill: black;
+    font-weight: bold;
+    color: #333;
 }
